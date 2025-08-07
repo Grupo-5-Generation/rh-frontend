@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { buscar } from "../../../services/Services";
 import type Setor from "../../../models/Setor";
+import CardSetores from "../cardsetores/CardSetores";
 
 
 
@@ -33,9 +34,9 @@ function ListaSetores() {
                     <div className='container mx-auto my-4 
                         grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'
                     >
-                        {/* {setor.map((setores) => (
-                            <CardCategorias key={categoria.id} categoria={categoria} />
-                        ))} */}
+                        {setor.map((setores) => (
+                            <CardSetores key={setores.id} setor={setores} />
+                        ))} 
                     </div>
                 </div>
             </div>

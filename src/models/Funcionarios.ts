@@ -6,6 +6,6 @@ export default interface Funcionarios {
   cpf: string;
   salario: number;
   data_nascimento: string;
-  data_admissao: Date; 
+  data_admissao?: string; 
   setor: Setor | null;
 }

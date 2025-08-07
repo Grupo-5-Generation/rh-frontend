@@ -4,6 +4,8 @@ import { useEffect, useState, type ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { atualizar, buscar, cadastrar } from "../../../services/Services";
 import type Funcionarios from "../../../models/Funcionarios";
+import ListaSetores from "../../setores/listarsetores/ListarSetores";
+import type Setor from "../../../models/Setor";
 
 
 function FormFuncionarios() {
@@ -11,6 +13,8 @@ function FormFuncionarios() {
     const navigate = useNavigate();
 
     const [funcionarios, setFuncionarios] = useState<Funcionarios>({} as Funcionarios)
+
+    const [setor, setSetor] = useState<Setor>({} as Setor)
 
     const { id } = useParams<{ id: string }>();
 
@@ -61,6 +65,14 @@ function FormFuncionarios() {
         }
     }
 
+    async function buscarSetorPorId(id: string) {
+        try {
+            await buscar(`/setores/${id}`, setSetor)
+        } catch (error: any) {
+            
+        }
+    }
+
     return (
         <div className="container flex flex-col items-center justify-center mx-auto font-raleway">
             <h1 className="text-4xl text-center my-8">
@@ -106,24 +118,22 @@ function FormFuncionarios() {
                         value={funcionarios.data_nascimento}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
-                    {/* <label htmlFor="data_nascimento">Digite a Data de Admissão do Funcionário</label> */}
-                    {/* <input
+                    <label htmlFor="data_nascimento">Digite a Data de Admissão do Funcionário</label> 
+                    <input
                         type="date"
                         placeholder="Digite a Data de Admissão do Funcionário"
                         name='data_admissao'
                         className="border-2 border-slate-700 rounded p-2"
                         value={funcionarios.data_admissao}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-                    /> */}
-                    {/* <label htmlFor="setor">Digite o Setor do Funcionário</label>
-                    <input
-                        type="Setor"
-                        placeholder="Digite o Setor do Funcionário"
-                        name='setor'
-                        className="border-2 border-slate-700 rounded p-2"
-                        value={funcionarios.setor}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-                    /> */}
+                    /> 
+                    <select name="" id="" className="border-2 px-2 py-1 rounded">
+                        <option value="">Escolha o Setor</option>
+                        {ListaSetores.map(setor => (
+                            <option value="">{setor.nome}</option>
+                        ))}
+                    </select>
+                    
                 </div>
                 <button
                     className="rounded text-slate-100 bg-teal-600 

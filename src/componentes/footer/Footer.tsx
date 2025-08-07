@@ -5,7 +5,7 @@ function Footer() {
 
     return (
         <>
-            <div className="flex justify-center bg-gradient-to-r from-stone-400 via-stone-600 to-stone-950 text-white font-joti">
+            <div className="flex justify-center bg-sky-900 text-white font-joti">
                 <div className="container flex flex-col items-center py-4">
                     <p className='text-xl font-bold'>
                         Grupo 5 | {data}

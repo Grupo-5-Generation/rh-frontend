@@ -1,203 +1,105 @@
-/*
-function FormPostagem() {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// import { useEffect, useState, type ChangeEvent } from "react";
+// import { useNavigate, useParams } from "react-router-dom";
+// import type Categoria from "../../../models/Categoria";
+// import { atualizar, buscar, cadastrar } from "../../../services/Service";
 
-    const navigate = useNavigate();
+// function FormCategoria() {
 
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [temas, setTemas] = useState<Tema[]>([])
+//     const navigate = useNavigate();
 
-    const [tema, setTema] = useState<Tema>({ id: 0, descricao: '', })
-    const [postagem, setPostagem] = useState<Postagem>({} as Postagem)
+//     const [categoria, setCategoria] = useState<Categoria>({} as Categoria)
+//     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const { id } = useParams<{ id: string }>()
+//     const { id } = useParams<{ id: string }>();
 
-    const { usuario, handleLogout } = useContext(AuthContext)
-    const token = usuario.token
+//     async function buscarPorId(id: string) {
+//         await buscar(`/categorias/${id}`, setCategoria)
+//     }
 
-    async function buscarPostagemPorId(id: string) {
-        try {
-            await buscar(`/postagens/${id}`, setPostagem, {
-                headers: { Authorization: token }
-            })
-        } catch (error: any) {
-            if (error.toString().includes('403')) {
-                handleLogout()
-            }
-        }
-    }
+//     useEffect(() => {
+//         if (id !== undefined) {
+//             buscarPorId(id)
+//         }
+//     }, [id])
 
-    async function buscarTemaPorId(id: string) {
-        try {
-            await buscar(`/temas/${id}`, setTema, {
-                headers: { Authorization: token }
-            })
-        } catch (error: any) {
-            if (error.toString().includes('403')) {
-                handleLogout()
-            }
-        }
-    }
+//     function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+//         setCategoria({
+//             ...categoria,
+//             [e.target.name]: e.target.value
+//         })
+//     }
 
-    async function buscarTemas() {
-        try {
-            await buscar('/temas', setTemas, {
-                headers: { Authorization: token }
-            })
-        } catch (error: any) {
-            if (error.toString().includes('403')) {
-                handleLogout()
-            }
-        }
-    }
+//     function retornar() {
+//         navigate("/categorias")
+//     }
 
-    useEffect(() => {
-        if (token === '') {
-            alert('Você precisa estar logado');
-            navigate('/');
-        }
-    }, [token])
 
-    useEffect(() => {
-        buscarTemas()
+//     async function gerarNovaCategoria(e: ChangeEvent<HTMLFormElement>) {
+//         e.preventDefault()
+//         setIsLoading(true)
 
-        if (id !== undefined) {
-            buscarPostagemPorId(id)
-        }
-    }, [id])
+//         if (id !== undefined) {
+//             try {
+//                 await atualizar(`/categorias`, categoria, setCategoria)
+//                 alert('A categoria foi atualizada com sucesso!')
+//             } catch (error: any) {
+//                 alert('Erro ao atualizar a categoria.')
+//             }
 
-    useEffect(() => {
-        setPostagem({
-            ...postagem,
-            tema: tema,
-        })
-    }, [tema])
+//             retornar()
 
-    function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
-        setPostagem({
-            ...postagem,
-            [e.target.name]: e.target.value,
-            tema: tema,
-            usuario: usuario,
-        });
-    }
+//         } else {
+//             try {
+//                 await cadastrar(`/categorias`, categoria, setCategoria)
+//                 alert('A categoria foi cadastrada com sucesso!')
+//             } catch (error: any) {
+//                 alert('Erro ao cadastrar a categoria.')
+//             }
 
-    function retornar() {
-        navigate('/postagens');
-    }
+//             setIsLoading(false)
+//             retornar()
+//         }
+//     }
 
-    async function gerarNovaPostagem(e: ChangeEvent<HTMLFormElement>) {
-        e.preventDefault()
-        setIsLoading(true)
+//     return (
+//         <div className="container flex flex-col items-center justify-center mx-auto font-raleway">
+//             <h1 className="text-4xl text-center my-8">
+//                 {id === undefined ? 'Cadastrar Categoria' : 'Editar Categoria'}
+//             </h1>
 
-        if (id !== undefined) {
-            try {
-                await atualizar(`/postagens`, postagem, setPostagem, {
-                    headers: {
-                        Authorization: token,
-                    },
-                });
+//             <form className="w-1/2 flex flex-col gap-4" onSubmit={gerarNovaCategoria} >
+//                 <div className="flex flex-col gap-2">
+//                     <label htmlFor="nome">Nome da Categoria</label>
+//                     <input
+//                         type="text"
+//                         placeholder="Escreva o Nome da Categoria"
+//                         name='nome'
+//                         className="border-2 border-slate-700 rounded p-2"
+//                         value={categoria.nome}
+//                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+//                     />
 
-                alert('Postagem atualizada com sucesso')
+//                     <label htmlFor="descricao">Descrição da Categoria</label>
+//                     <input
+//                         type="text"
+//                         placeholder="Descreva aqui a Categoria"
+//                         name='descricao'
+//                         className="border-2 border-slate-700 rounded p-2"
+//                         value={categoria.descricao}
+//                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+//                     />
+//                 </div>
+//                 <button
+//                     className="rounded text-slate-100 bg-teal-600 
+//                                hover:bg-teal-800 w-1/2 py-2 mx-auto flex justify-center"
+//                     type="submit">
+//                     <span>{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>
+//                 </button>
+//             </form>
+//         </div>
+//     );
+// }
 
-            } catch (error: any) {
-                if (error.toString().includes('403')) {
-                    handleLogout()
-                } else {
-                    alert('Erro ao atualizar a Postagem')
-                }
-            }
-
-        } else {
-            try {
-                await cadastrar(`/postagens`, postagem, setPostagem, {
-                    headers: {
-                        Authorization: token,
-                    },
-                })
-
-                alert('Postagem cadastrada com sucesso');
-
-            } catch (error: any) {
-                if (error.toString().includes('403')) {
-                    handleLogout()
-                } else {
-                    alert('Erro ao cadastrar a Postagem');
-                }
-            }
-        }
-
-        setIsLoading(false)
-        retornar()
-    }
-
-    const carregandoTema = tema.descricao === '';
-
-    return (
-        <div className="container flex flex-col mx-auto items-center">
-            <h1 className="text-4xl text-center my-8">
-                {id !== undefined ? 'Editar Postagem' : 'Cadastrar Postagem'}
-            </h1>
-
-            <form className="flex flex-col w-1/2 gap-4" onSubmit={gerarNovaPostagem}>
-                <div className="flex flex-col gap-2">
-                    <label htmlFor="titulo">Título da Postagem</label>
-                    <input
-                        type="text"
-                        placeholder="Titulo"
-                        name="titulo"
-                        required
-                        className="border-2 border-slate-700 rounded p-2"
-                        value={postagem.titulo}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-                    />
-                </div>
-                <div className="flex flex-col gap-2">
-                    <label htmlFor="titulo">Texto da Postagem</label>
-                    <input
-                        type="text"
-                        placeholder="Texto"
-                        name="texto"
-                        required
-                        className="border-2 border-slate-700 rounded p-2"
-                        value={postagem.texto}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-                    />
-                </div>
-                <div className="flex flex-col gap-2">
-                    <p>Tema da Postagem</p>
-                    <select name="tema" id="tema" className='border p-2 border-slate-800 rounded'
-                        onChange={(e) => buscarTemaPorId(e.currentTarget.value)}
-                    >
-                        <option value="" selected disabled>Selecione um Tema</option>
-
-                        {temas.map((tema) => (
-                            <>
-                                <option value={tema.id} >{tema.descricao}</option>
-                            </>
-                        ))}
-
-                    </select>
-                </div>
-                <button
-                    type='submit'
-                    className='rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800
-                               text-white font-bold w-1/2 mx-auto py-2 flex justify-center'
-                    disabled={carregandoTema}
-                >
-                    {isLoading ?
-                        <RotatingLines
-                            strokeColor="white"
-                            strokeWidth="5"
-                            animationDuration="0.75"
-                            width="24"
-                            visible={true}
-                        /> :
-                        <span>{id !== undefined ? 'Atualizar' : 'Cadastrar'}</span>
-                    }
-                </button>
-            </form>
-        </div>
-    );
-}
-
-export default FormPostagem; */
+// export default FormCategoria;

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './Cadastro.css'
 
 function Cadastro() {
@@ -16,7 +17,7 @@ function Cadastro() {
               name="nome"
               placeholder="Nome"
               className="border-2 border-slate-700 rounded p-2"
-             
+
             />
           </div>
           <div className="flex flex-col w-full">
@@ -60,19 +61,20 @@ function Cadastro() {
             />
           </div>
           <div className="flex justify-around w-full gap-8">
-            <button 
-                type='reset'
-                className='rounded text-white bg-red-400 hover:bg-red-700 w-1/2 py-2'
-             >
-                Cancelar
+            <button
+              type='reset'
+              className='rounded text-white bg-red-400 hover:bg-red-700 w-1/2 py-2'
+
+            >
+              <Link to='/login' className=''>Cancelar</Link>
             </button>
-            <button 
-                type='submit'
-                className='rounded text-white bg-indigo-400 
+            <button
+              type='submit'
+              className='rounded text-white bg-indigo-400 
                            hover:bg-indigo-900 w-1/2 py-2
-                           flex justify-center' 
-                >
-              Cadastrar
+                           flex justify-center'
+            >
+              <Link to='/home' className=''>Cadastrar</Link>
             </button>
           </div>
         </form>

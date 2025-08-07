@@ -5,7 +5,7 @@ export default interface Funcionarios {
   nome: string;
   cpf: string;
   salario: number;
-  data_nascimento: Date;
+  data_nascimento: string;
   data_admissao: Date; 
   setor: Setor | null;
 }

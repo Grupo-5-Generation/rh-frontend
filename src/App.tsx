@@ -1,8 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/home/Home";
 import Footer from "./componentes/footer/Footer";
+import FormFuncionarios from "./componentes/funcionarios/formfuncionarios/FormFuncionarios";
 import Navbar from "./componentes/navbar/Navbar";
+import FormSetor from "./componentes/setores/formsetores/FormSetores";
 import Cadastro from "./pages/cadastro/Cadastro";
+import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 
 function App() {
@@ -16,7 +18,9 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/cadastro" element={<Cadastro />} />
-             <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/funcionarios" element={<FormFuncionarios />} />
+            <Route path="/setores" element={<FormSetor />} />
           </Routes>
         </div>
         <Footer />

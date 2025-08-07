@@ -1,34 +1,23 @@
-/*
-function FormTema() {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useEffect, useState, type ChangeEvent } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import type Setor from "../../../models/Setor";
+import { atualizar, buscar, cadastrar } from "../../../services/Services";
+
+
+function FormSetor() {
 
     const navigate = useNavigate();
 
-    const [tema, setTema] = useState<Tema>({} as Tema)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [setor, setSetor] = useState<Setor>({} as Setor)
 
-    const { usuario, handleLogout } = useContext(AuthContext)
-    const token = usuario.token
 
     const { id } = useParams<{ id: string }>();
 
     async function buscarPorId(id: string) {
-        try {
-            await buscar(`/temas/${id}`, setTema, {
-                headers: { Authorization: token }
-            })
-        } catch (error: unknown) {
-            if (error.toString().includes('403')) {
-                handleLogout()
-            }
-        }
+        await buscar(`/setors/${id}`, setSetor)
     }
-
-    useEffect(() => {
-        if (token === '') {
-            alert('Você precisa estar logado!')
-            navigate('/')
-        }
-    }, [navigate, token])
 
     useEffect(() => {
         if (id !== undefined) {
@@ -37,91 +26,69 @@ function FormTema() {
     }, [id])
 
     function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
-        setTema({
-            ...tema,
+        setSetor({
+            ...setor,
             [e.target.name]: e.target.value
         })
     }
 
     function retornar() {
-        navigate("/temas")
+        navigate("/setores")
     }
 
-    async function gerarNovoTema(e: ChangeEvent<HTMLFormElement>) {
+
+    async function gerarNovoSetor(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
-        setIsLoading(true)
 
         if (id !== undefined) {
             try {
-                await atualizar(`/temas`, tema, setTema, {
-                    headers: { 'Authorization': token }
-                })
-                alert('O Tema foi atualizado com sucesso!')
+                await atualizar(`/setores`, setor, setSetor)
+                alert('O setor foi atualizado com sucesso!')
             } catch (error: any) {
-                if (error.toString().includes('403')) {
-                    handleLogout();
-                } else {
-                    alert('Erro ao atualizar o tema.')
-                }
-
+                alert('Erro ao atualizar o setor.')
             }
+
+            retornar()
+
         } else {
             try {
-                await cadastrar(`/temas`, tema, setTema, {
-                    headers: { 'Authorization': token }
-                })
-                alert('O Tema foi cadastrado com sucesso!')
+                await cadastrar(`/setores`, setor, setSetor)
+                alert('O setor foi cadastrado com sucesso!')
             } catch (error: any) {
-                if (error.toString().includes('403')) {
-                    handleLogout();
-                } else {
-                    alert('Erro ao cadastrar o tema.')
-                }
-
+                alert('Erro ao cadastrar o setor.')
             }
-        }
 
-        setIsLoading(false)
-        retornar()
+            retornar()
+        }
     }
 
     return (
-        <div className="container flex flex-col items-center justify-center mx-auto">
+        <div className="container flex flex-col items-center justify-center mx-auto font-raleway">
             <h1 className="text-4xl text-center my-8">
-                {id === undefined ? 'Cadastrar Tema' : 'Editar Tema'}
+                {id === undefined ? 'Cadastrar Setor' : 'Editar Setor'}
             </h1>
 
-            <form className="w-1/2 flex flex-col gap-4" onSubmit={gerarNovoTema}>
+            <form className="w-1/2 flex flex-col gap-4" onSubmit={gerarNovoSetor} >
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="descricao">Descrição do Tema</label>
+                    <label htmlFor="nome">Nome do Setor</label>
                     <input
                         type="text"
-                        placeholder="Descreva aqui seu tema"
-                        name='descricao'
+                        placeholder="Escreva o Nome do setor"
+                        name='nome'
                         className="border-2 border-slate-700 rounded p-2"
-                        value={tema.descricao}
+                        value={setor.nome}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
                 </div>
                 <button
-                    className="rounded text-slate-100 bg-indigo-400 
-                               hover:bg-indigo-800 w-1/2 py-2 mx-auto flex justify-center"
+                    className="rounded text-slate-100 bg-teal-600 
+                               hover:bg-teal-800 w-1/2 py-2 mx-auto flex justify-center"
                     type="submit">
-                    {isLoading ?
-                        <RotatingLines
-                            strokeColor="white"
-                            strokeWidth="5"
-                            animationDuration="0.75"
-                            width="24"
-                            visible={true}
-                        /> :
-                        <span>{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>
-
-                    }
+                    <span>{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>
                 </button>
             </form>
         </div>
     );
 }
 
-export default FormTema; */
+export default FormSetor;

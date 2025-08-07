@@ -1,66 +1,46 @@
-// import { useContext, useEffect, useState } from "react";
-// import { DNA } from "react-loader-spinner";
-// import { useNavigate } from "react-router-dom";
-// import { AuthContext } from "../../../contexts/AuthContext";
-// import type Tema from "../../../models/Tema";
-// import CardTemas from "../cardtemas/CardTemas";
-// import { buscar } from "../../../services/Service";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useEffect, useState } from "react";
+import { buscar } from "../../../services/Services";
+import type Setor from "../../../models/Setor";
 
-// function ListaTemas() {
 
-//     const navigate = useNavigate();
 
-//     const [temas, setTemas] = useState<Tema[]>([])
 
-//     const { usuario, handleLogout } = useContext(AuthContext)
-//     const token = usuario.token
+function ListaSetores() {
 
-//     async function buscarTemas() {
-//         try {
-//             await buscar('/temas', setTemas, {
-//                 headers: { Authorization: token }
-//             })
-//         } catch (error: any) {
-//             if (error.toString().includes('403')) {
-//                 handleLogout()
-//             }
-//         }
-//     }
+    const [setor, setSetor] = useState<Setor>({} as Setor)
 
-//     useEffect(() => {
-//         if (token === '') {
-//             alert('Você precisa estar logado!')
-//             navigate('/')
-//         }
-//     }, [navigate, token])
+    async function buscarSetor() {
+        await buscar('/setores', setSetor)
+    }
 
-//     useEffect(() => {
-//         buscarTemas()    
-//     }, [temas.length])
-    
-//     return (
-//         <>
-//         {temas.length === 0 && (
-//             <DNA
-//             visible={true}
-//             height="200"
-//             width="200"
-//             ariaLabel="dna-loading"
-//             wrapperStyle={{}}
-//             wrapperClass="dna-wrapper mx-auto"
-//         />
-//         )}
-//             <div className="flex justify-center w-full my-4">
-//                 <div className="container flex flex-col">
-//                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//                        {temas.map((tema) => (
-//                             <CardTemas key={tema.id} tema={tema} />
-//                         ))}
-//                     </div>
-//                 </div>
-//             </div>
-//         </>
-//     )
-// }
+    async function buscarPorId(id: string) {
+        await buscar(`/setores/${id}`, setSetor)
+    }
 
-// export default ListaTemas;
+    async function buscarPorNome(nome: string) {
+        await buscar(`/setores/${nome}`, setSetor)
+    }
+
+    useEffect(() => {
+        buscarSetor()
+    }, [])
+
+    return (
+        <>
+            <div className="flex justify-center w-full my-4">
+                <div className="container flex flex-col mx-2">
+                    <div className='container mx-auto my-4 
+                        grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'
+                    >
+                        {/* {setor.map((setores) => (
+                            <CardCategorias key={categoria.id} categoria={categoria} />
+                        ))} */}
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+}
+
+export default ListaSetores;

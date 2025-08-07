@@ -11,8 +11,8 @@ function Navbar() {
                     <Link to='/home' className="text-2xl font-bold">NoWhereRH</Link>
 
                     <div className='flex gap-4'>
-                        <Link to='/home' className='hover:bg-amber-500'>Home</Link>
-                        <Link to='/cadastro' className='hover:bg-amber-500'>Cadastro</Link>
+                        <Link to='/funcionarios' className='hover:bg-amber-500'>Funcionários</Link>
+                        <Link to='/setores' className='hover:bg-amber-500'>Setores</Link>
                     </div>
                 </div>
             </div>

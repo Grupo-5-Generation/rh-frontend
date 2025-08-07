@@ -2,36 +2,56 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState, type ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { atualizar, buscar, cadastrar } from "../../../services/Services";
 import type Funcionarios from "../../../models/Funcionarios";
-import ListaSetores from "../../setores/listarsetores/ListarSetores";
 import type Setor from "../../../models/Setor";
+import { atualizar, buscar, cadastrar } from "../../../services/Services";
 
 
 function FormFuncionarios() {
 
     const navigate = useNavigate();
 
-    const [funcionarios, setFuncionarios] = useState<Funcionarios>({} as Funcionarios)
+    const [funcionario, setFuncionario] = useState<Funcionarios>({} as Funcionarios)
 
-    const [setor, setSetor] = useState<Setor>({} as Setor)
+    const [setores, setSetores] = useState<Setor[]>([])
+
+    const [setor, setSetor] = useState<Setor>({ id: 0, nome: '', })
 
     const { id } = useParams<{ id: string }>();
 
-    async function buscarPorId(id: string) {
-        await buscar(`/funcionarios/${id}`, setFuncionarios)
+
+    async function buscarFuncionarioPorId(id: string) {
+        await buscar(`/funcionarios/${id}`, setFuncionario)
+    }
+
+    async function buscarSetorPorId(id: string) {
+        await buscar(`/setores/${id}`, setSetor)
+    }
+
+    async function buscarSetores() {
+        await buscar(`/setores/`, setSetores)
     }
 
     useEffect(() => {
+        buscarSetores()
+
         if (id !== undefined) {
-            buscarPorId(id)
+            buscarFuncionarioPorId(id)
         }
     }, [id])
 
+    useEffect(() => {
+        setFuncionario({
+            ...funcionario,
+            setor: setor,
+        })
+    }, [setor])
+
     function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
-        setFuncionarios({
-            ...funcionarios,
-            [e.target.name]: e.target.value
+        setFuncionario({
+            ...funcionario,
+            [e.target.name]: e.target.value,
+            setor: setor,
         })
     }
 
@@ -45,7 +65,7 @@ function FormFuncionarios() {
 
         if (id !== undefined) {
             try {
-                await atualizar(`/funcionarios`, funcionarios, setFuncionarios)
+                await atualizar(`/funcionarios`, funcionario, setFuncionario)
                 alert('O funcionário foi atualizado com sucesso!')
             } catch (error: any) {
                 alert('Erro ao atualizar o funcionário.')
@@ -55,21 +75,13 @@ function FormFuncionarios() {
 
         } else {
             try {
-                await cadastrar(`/funcionarios`, funcionarios, setFuncionarios)
+                await cadastrar(`/funcionarios`, funcionario, setFuncionario)
                 alert('O funcionário foi cadastrado com sucesso!')
             } catch (error: any) {
                 alert('Erro ao cadastrar o funcionário.')
             }
 
             retornar()
-        }
-    }
-
-    async function buscarSetorPorId(id: string) {
-        try {
-            await buscar(`/setores/${id}`, setSetor)
-        } catch (error: any) {
-            
         }
     }
 
@@ -87,7 +99,7 @@ function FormFuncionarios() {
                         placeholder="Escreva o Nome do Funcionário"
                         name='nome'
                         className="border-2 border-slate-700 rounded p-2"
-                        value={funcionarios.nome}
+                        value={funcionario.nome}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
 
@@ -97,7 +109,7 @@ function FormFuncionarios() {
                         placeholder="Digite o CPF do Funcionário"
                         name='cpf'
                         className="border-2 border-slate-700 rounded p-2"
-                        value={funcionarios.cpf}
+                        value={funcionario.cpf}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
                     <label htmlFor="salario">Digite o salário do Funcionário</label>
@@ -106,7 +118,7 @@ function FormFuncionarios() {
                         placeholder="Digite o salário do Funcionário"
                         name='salario'
                         className="border-2 border-slate-700 rounded p-2"
-                        value={funcionarios.salario}
+                        value={funcionario.salario}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
                     <label htmlFor="data_nascimento">Digite a Data de Nascimento do Funcionário</label>
@@ -115,7 +127,7 @@ function FormFuncionarios() {
                         placeholder="Digite a Data de Nascimento do Funcionário"
                         name='data_nascimento'
                         className="border-2 border-slate-700 rounded p-2"
-                        value={funcionarios.data_nascimento}
+                        value={funcionario.data_nascimento}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
                     <label htmlFor="data_nascimento">Digite a Data de Admissão do Funcionário</label> 
@@ -124,12 +136,14 @@ function FormFuncionarios() {
                         placeholder="Digite a Data de Admissão do Funcionário"
                         name='data_admissao'
                         className="border-2 border-slate-700 rounded p-2"
-                        value={funcionarios.data_admissao}
+                        value={funcionario.data_admissao}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     /> 
-                    <select name="" id="" className="border-2 px-2 py-1 rounded">
-                        <option value="">Escolha o Setor</option>
-                        {ListaSetores.map(setor => (
+                    <select name="" id="" className='border p-2 border-slate-800 rounded'
+                        onChange={(e) => buscarSetorPorId(e.currentTarget.value)}
+                        >
+                        <option value="">Selecione um Setor</option>
+                        {setores.map(setor => (
                             <option value="">{setor.nome}</option>
                         ))}
                     </select>
@@ -137,7 +151,7 @@ function FormFuncionarios() {
                 </div>
                 <button
                     className="rounded text-slate-100 bg-teal-600 
-                               hover:bg-teal-800 w-1/2 py-2 mx-auto flex justify-center"
+                            hover:bg-teal-800 w-1/2 py-2 mx-auto flex justify-center"
                     type="submit">
                     <span>{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>
                 </button>

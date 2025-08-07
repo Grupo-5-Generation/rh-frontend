@@ -21,6 +21,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/funcionarios" element={<FormFuncionarios />} />
             <Route path="/setores" element={<FormSetor />} />
+            <Route path="/cadastrarfuncionarios" element={<FormFuncionarios />} />
+            <Route path="/editarfuncionarios/:id" element={<FormFuncionarios />} />
           </Routes>
         </div>
         <Footer />

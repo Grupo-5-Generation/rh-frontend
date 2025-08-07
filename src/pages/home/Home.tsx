@@ -1,3 +1,5 @@
+import ListaFuncionarios from "../../componentes/funcionarios/listarfuncionarios/ListarFuncionarios"
+import ModalFuncionario from "../../componentes/funcionarios/modalfuncionario/ModalFuncionario"
 
 
 function Home() {
@@ -16,20 +18,13 @@ function Home() {
 
                         <div className="flex justify-around gap-4">
                             <div className="flex justify-around gap-4">
-                        
+                                <ModalFuncionario />
                             </div>
                         </div>
                     </div>
-
-                    {/* <div className=" flex justify-center">
-                        <img
-                            src="https:ik.imagekit.io/zddqh4rhi/Apresenta%C3%A7%C3%A3o%20Gest%C3%A3o%20de%20Recursos%20Humanos%20Ilustrado%20Azul%20e%20Bege.png?updatedAt=1754576450200"
-                            alt="Imagem Página Home"
-                            className='w-2/3'
-                        />
-                    </div> */}
                 </div>
             </div>
+            <ListaFuncionarios />
         </>
     )
 }

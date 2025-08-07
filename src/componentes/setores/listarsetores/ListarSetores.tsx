@@ -4,9 +4,6 @@ import type Setor from "../../../models/Setor";
 import { buscar } from "../../../services/Services";
 import CardSetores from "../cardsetores/CardSetores";
 
-
-
-
 function ListaSetores() {
 
     const [setores, setSetor] = useState<Setor[]>([])

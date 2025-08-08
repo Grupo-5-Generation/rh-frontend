@@ -1,20 +1,22 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./componentes/footer/Footer";
+import DeletarFuncionario from "./componentes/funcionarios/deletarfuncionario/DeletarFuncionario";
 import FormFuncionarios from "./componentes/funcionarios/formfuncionarios/FormFuncionarios";
+import ListaFuncionarios from "./componentes/funcionarios/listarfuncionarios/ListarFuncionarios";
 import Navbar from "./componentes/navbar/Navbar";
-import FormSetor from "./componentes/setores/formsetores/FormSetores";
+import DeletarSetor from "./componentes/setores/deletarsetor/DeletarSetor";
+import FormSetores from "./componentes/setores/formsetores/FormSetores";
+import ListaSetores from "./componentes/setores/listarsetores/ListarSetores";
 import Cadastro from "./pages/cadastro/Cadastro";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
-import ListaFuncionarios from "./componentes/funcionarios/listarfuncionarios/ListarFuncionarios";
-import ListaSetores from "./componentes/setores/listarsetores/ListarSetores";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Navbar />
-        <div className="min-h-[80vh]">
+        <div className="min-h-[80vh] bg-[#fffbf7]">
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/home" element={<Home />} />
@@ -22,9 +24,12 @@ function App() {
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/login" element={<Login />} />
             <Route path="/funcionarios" element={<FormFuncionarios />} />
-            <Route path="/setores" element={<FormSetor />} />
+            <Route path="/setores" element={<FormSetores />} />
+            <Route path="/editarsetores/:id" element={<FormSetores />} />
+            <Route path="/deletarsetores/:id" element={<DeletarSetor />} />
             <Route path="/cadastrarfuncionarios" element={<FormFuncionarios />} />
-            <Route path="/editarfuncionarios/:id" element={<FormFuncionarios />} />
+            <Route path="/editarfuncionario/:id" element={<FormFuncionarios />} />
+            <Route path="/deletarfuncionario/:id" element={<DeletarFuncionario />} />
             <Route path="/listarfuncionarios" element={<ListaFuncionarios />} />
             <Route path="/listarsetores" element={<ListaSetores />} />
           </Routes>

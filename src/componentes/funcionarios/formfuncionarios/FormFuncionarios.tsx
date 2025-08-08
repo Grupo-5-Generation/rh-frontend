@@ -89,7 +89,7 @@ function FormFuncionarios() {
 
     return (
         <div className="container flex flex-col items-center justify-center mx-auto font-raleway">
-            <h1 className="text-4xl text-center my-8">
+            <h1 className="text-4xl text-center my-8 text-sky-900 font-bold">
                 {id === undefined ? 'Cadastrar Funcionário' : 'Editar Funcionário'}
             </h1>
 
@@ -100,7 +100,7 @@ function FormFuncionarios() {
                         type="text"
                         placeholder="Escreva o Nome do Funcionário"
                         name='nome'
-                        className="border-2 border-slate-700 rounded p-2"
+                        className="border-2 border-slate-700 rounded p-2 bg-white"
                         value={funcionario.nome}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
@@ -110,16 +110,16 @@ function FormFuncionarios() {
                         type="text"
                         placeholder="Digite o CPF do Funcionário"
                         name='cpf'
-                        className="border-2 border-slate-700 rounded p-2"
+                        className="border-2 border-slate-700 rounded p-2 bg-white"
                         value={funcionario.cpf}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
-                    <label htmlFor="salario">Digite o salário do Funcionário</label>
+                    <label htmlFor="salario">Digite o Salário do Funcionário</label>
                     <input
                         type="number"
                         placeholder="Digite o salário do Funcionário"
                         name='salario'
-                        className="border-2 border-slate-700 rounded p-2"
+                        className="border-2 border-slate-700 rounded p-2 bg-white"
                         value={funcionario.salario}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
@@ -128,7 +128,7 @@ function FormFuncionarios() {
                         type="date"
                         placeholder="Digite a Data de Nascimento do Funcionário"
                         name='data_nascimento'
-                        className="border-2 border-slate-700 rounded p-2"
+                        className="border-2 border-slate-700 rounded p-2 bg-white"
                         value={funcionario.data_nascimento}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
@@ -137,11 +137,11 @@ function FormFuncionarios() {
                         type="date"
                         placeholder="Digite a Data de Admissão do Funcionário"
                         name='data_admissao'
-                        className="border-2 border-slate-700 rounded p-2"
+                        className="border-2 border-slate-700 rounded p-2 bg-white"
                         value={funcionario.data_admissao}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     /> 
-                    <select name="" id="" className='border p-2 border-slate-800 rounded'
+                    <select name="" id="" className='border-2 p-2 border-slate-800 rounded bg-white my-5'
                         onChange={(e) => buscarSetorPorId(e.currentTarget.value)}
                         >
                         <option value="">Selecione um Setor</option>
@@ -152,8 +152,8 @@ function FormFuncionarios() {
                     
                 </div>
                 <button
-                    className="rounded text-slate-100 bg-teal-600 
-                            hover:bg-teal-800 w-1/2 py-2 mx-auto flex justify-center"
+                    className="rounded text-slate-100 bg-sky-900 
+                            hover:bg-sky-950 w-1/2 py-2 mx-auto my-5 flex justify-center"
                     type="submit">
                     <span>{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>
                 </button>

@@ -28,7 +28,7 @@ function ListaSetores() {
         <>
             <div className="flex justify-center w-full my-4">
                 <div className="container flex flex-col mx-2">
-                    <div className='container mx-auto my-4 id grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                    <div className='container mx-auto my-4 id grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                         {setores.map((setor) => (
                             <CardSetores key={setor.id} setor={setor} />
                         ))} 

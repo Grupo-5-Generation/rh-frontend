@@ -6,7 +6,7 @@ import type Setor from "../../../models/Setor";
 import { atualizar, buscar, cadastrar } from "../../../services/Services";
 
 
-function FormSetor() {
+function FormSetores() {
 
     const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ function FormSetor() {
     const { id } = useParams<{ id: string }>();
 
     async function buscarPorId(id: string) {
-        await buscar(`/setors/${id}`, setSetor)
+        await buscar(`/setores/${id}`, setSetor)
     }
 
     useEffect(() => {
@@ -64,7 +64,7 @@ function FormSetor() {
 
     return (
         <div className="container flex flex-col items-center justify-center mx-auto font-raleway">
-            <h1 className="text-4xl text-center my-8">
+            <h1 className="text-4xl text-center my-8 text-sky-900 font-bold">
                 {id === undefined ? 'Cadastrar Setor' : 'Editar Setor'}
             </h1>
 
@@ -73,7 +73,7 @@ function FormSetor() {
                     <label htmlFor="nome">Nome do Setor</label>
                     <input
                         type="text"
-                        placeholder="Escreva o Nome do setor"
+                        placeholder="Escreva o Nome do Setor"
                         name='nome'
                         className="border-2 border-slate-700 rounded p-2"
                         value={setor.nome}
@@ -81,14 +81,14 @@ function FormSetor() {
                     />
                 </div>
                 <button
-                    className="rounded text-slate-100 bg-teal-600 
-                               hover:bg-teal-800 w-1/2 py-2 mx-auto flex justify-center"
+                    className="rounded text-sky-950  bg-orange-300
+                               hover:bg-orange-400 w-1/2 py-2 mx-auto flex justify-center"
                     type="submit">
-                    <span>{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>
+                    <span className="font-bold">{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>
                 </button>
             </form>
         </div>
     );
 }
 
-export default FormSetor;
+export default FormSetores;

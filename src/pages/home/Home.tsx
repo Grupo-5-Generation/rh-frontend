@@ -5,7 +5,7 @@ function Home() {
     return (
         <>
             <div className="bg-[url(https://ik.imagekit.io/vtdzeofuq/fotofundoRH.png?updatedAt=1754662426803)] 
-             bg-no-repeat bg-cover bg-fixed p-30">
+             bg-no-repeat bg-cover  p-30">
                 <div className="flex flex-col gap-5 text-right">
                     <h2 className='text-5xl font-bold text-sky-900 mx-6'>
                         NoWhereRH
@@ -28,7 +28,7 @@ function Home() {
                     </div>
                     <div className="">
                         <img src="https://ik.imagekit.io/vtdzeofuq/imagemfundoazulclaro.png?updatedAt=1754664518621"
-                            alt="Foto da div" className="w-[500px] h-[300px] justify-end py-5 px-5">
+                            alt="Foto da div" className="w-[500px] h-[300px] justify-end py-5 px-12 mx-20">
                         </img>
                     </div>
             </div>

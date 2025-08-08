@@ -1,11 +1,30 @@
-import { Link } from 'react-router-dom'
+import { Link,  useNavigate } from 'react-router-dom'
 import type Funcionarios from '../../../models/Funcionarios'
+import { useState } from 'react';
+import { calcularSalario } from '../../../services/Services';
 
 interface CardFuncionariosProps {
     funcionario: Funcionarios
 }
 
 function CardFuncionarios({ funcionario }: CardFuncionariosProps) {
+
+    const [funcionarioAumento, setFuncionarioAumento] = useState<Funcionarios>({} as Funcionarios) 
+    const navigate = useNavigate();
+
+
+  async function darAumento() {
+    try {
+     await calcularSalario(`/funcionarios/${funcionario.id}`, setFuncionarioAumento);
+      alert("Salário atualizado com sucesso!");
+        navigate("/home");
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao calcular salário.");
+    }
+  }
+
+
     return (
         <div className='border-slate-900 border 
             flex flex-col rounded overflow-hidden justify-between'>
@@ -26,7 +45,7 @@ function CardFuncionarios({ funcionario }: CardFuncionariosProps) {
                     <p><strong>Salário:</strong> {funcionario.salario}</p>
                     <p><strong>Data de início:</strong> {funcionario.data_admissao}</p>
                     <p><strong>Aniversário:</strong> {funcionario.data_nascimento}</p>
-                    {/* <p><strong>Setor:</strong> {funcionario.setor?setor}</p> */}
+                
                 </div>
             </div>
             <div className="flex">
@@ -40,6 +59,9 @@ function CardFuncionarios({ funcionario }: CardFuncionariosProps) {
                     hover:bg-red-700 w-full flex items-center justify-center'>
                     <button>Deletar</button>
                 </Link>
+                    <button onClick={darAumento} className='text-white bg-purple-400
+                     hover:bg-purple-700 w-full flex items-center justify-center'>Dar aumento</button>
+                
             </div>
         </div>
     )

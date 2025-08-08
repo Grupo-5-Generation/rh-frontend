@@ -15,7 +15,7 @@ export const cadastrar = async (url: string, dados: object, setDados: Function) 
     setDados(resposta.data)
 }
 
-export let calcularSalario =  async ( url:string, setDados:Function ) => {
+export const calcularSalario =  async ( url:string, setDados:Function ) => {
     const resposta = await api.put(url);
     setDados (resposta.data)
 

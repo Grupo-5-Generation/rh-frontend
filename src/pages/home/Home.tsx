@@ -1,30 +1,37 @@
-import ListaFuncionarios from "../../componentes/funcionarios/listarfuncionarios/ListarFuncionarios"
 import ModalFuncionario from "../../componentes/funcionarios/modalfuncionario/ModalFuncionario"
 
 
 function Home() {
     return (
         <>
-            <div className="bg-[url(https:ik.imagekit.io/zddqh4rhi/Apresenta%C3%A7%C3%A3o%20Gest%C3%A3o%20de%20Recursos%20Humanos%20Ilustrado%20Azul%20e%20Bege.png?updatedAt=1754576450200)] 
-             bg-no-repeat bg-cover bg-fixed p-80">
-                <div className='container grid grid-cols-2 text-white'>
-                    <div className="flex flex-col gap-4 items-center justify-center py-4">
-                        <h2 className='text-5xl font-bold text-blue-600 flex'>
-                            NoWhereRH
-                        </h2>
-                        <p className='text-xl text-blue-600'>
-                            De 'nenhum lugar' para o lugar certo.
-                        </p>
+            <div className="bg-[url(https://ik.imagekit.io/vtdzeofuq/fotofundoRH.png?updatedAt=1754662426803)] 
+             bg-no-repeat bg-cover bg-fixed p-30">
+                <div className="flex flex-col gap-5 text-right">
+                    <h2 className='text-5xl font-bold text-sky-900 mx-6'>
+                        NoWhereRH
+                    </h2>
+                    <p className='text-xl text-sky-900'>
+                        De 'nenhum lugar' para o lugar certo.
+                    </p>
 
-                        <div className="flex justify-around gap-4">
-                            <div className="flex justify-around gap-4">
-                                <ModalFuncionario />
-                            </div>
+                    <div className="flex justify-end mx-15 p-4 text-orange-400 font-bold">
+                        <div className="flex">
+                            <ModalFuncionario />
                         </div>
                     </div>
                 </div>
             </div>
-            <ListaFuncionarios />
+
+            <div className="grid grid-cols-2 gap-4 bg-[#6186BF]">
+                <div className="text-sky-900 text-3xl p-25 text-center text-shadow-xs font-bold">
+                    <p>Otimize a gestão de pessoas da sua empresa com o Sistema de RH completo</p>
+                    </div>
+                    <div className="">
+                        <img src="https://ik.imagekit.io/vtdzeofuq/imagemfundoazulclaro.png?updatedAt=1754664518621"
+                            alt="Foto da div" className="w-[500px] h-[300px] justify-end py-5 px-5">
+                        </img>
+                    </div>
+            </div>
         </>
     )
 }

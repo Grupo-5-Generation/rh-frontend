@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState, type ChangeEvent } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import type Setor from "../../../models/Setor";
 import { atualizar, buscar, cadastrar } from "../../../services/Services";
 
@@ -68,25 +68,28 @@ function FormSetores() {
                 {id === undefined ? 'Cadastrar Setor' : 'Editar Setor'}
             </h1>
 
-            <form className="w-1/2 flex flex-col gap-4" onSubmit={gerarNovoSetor} >
+            <form className="w-1/2 flex flex-col gap-4 text-sky-900 font-bold" onSubmit={gerarNovoSetor} >
                 <div className="flex flex-col gap-2">
                     <label htmlFor="nome">Nome do Setor</label>
                     <input
                         type="text"
                         placeholder="Escreva o Nome do Setor"
                         name='nome'
-                        className="border-2 border-slate-700 rounded p-2"
+                        className="border-2 border-slate-700 rounded p-2 bg-white"
                         value={setor.nome}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
                 </div>
-                <button
-                    className="rounded text-sky-950  bg-orange-300
-                               hover:bg-orange-400 w-1/2 py-2 mx-auto flex justify-center"
-                    type="submit">
-                    <span className="font-bold">{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>
-                </button>
+                <div className="flex gap-6 p-6 justify-center">
+                    <button className="rounded text-slate-100 font-bold bg-sky-900 hover:bg-sky-950 px-6 py-2" type="submit" >
+                        {id === undefined ? 'Cadastrar' : 'Atualizar'}
+                    </button>
+                    <Link to={`/listarsetores/`} className="rounded text-slate-100 font-bold bg-[#4172bd] hover:bg-[#275292] px-6 py-2">
+                        Cancelar
+                    </Link>
+                </div>
             </form>
+            
         </div>
     );
 }

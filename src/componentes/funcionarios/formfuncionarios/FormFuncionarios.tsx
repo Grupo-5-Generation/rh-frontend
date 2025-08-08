@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState, type ChangeEvent } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import type Funcionarios from "../../../models/Funcionarios";
 import type Setor from "../../../models/Setor";
-import { atualizar, buscar, cadastrar, calcularSalario } from "../../../services/Services";
+import { atualizar, buscar, cadastrar } from "../../../services/Services";
 
 
 function FormFuncionarios() {
@@ -93,7 +93,7 @@ function FormFuncionarios() {
                 {id === undefined ? 'Cadastrar Funcionário' : 'Editar Funcionário'}
             </h1>
 
-            <form className="w-1/2 flex flex-col gap-4" onSubmit={gerarNovoFuncionario} >
+            <form className="w-1/2 flex flex-col gap-4 text-sky-900 font-bold" onSubmit={gerarNovoFuncionario} >
                 <div className="flex flex-col gap-2">
                     <label htmlFor="nome">Nome do Funcionário</label>
                     <input
@@ -151,12 +151,15 @@ function FormFuncionarios() {
                     </select>
                     
                 </div>
-                <button
-                    className="rounded text-slate-100 bg-sky-900 
-                            hover:bg-sky-950 w-1/2 py-2 mx-auto my-5 flex justify-center"
-                    type="submit">
-                    <span>{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>
-                </button>
+                <div className="flex gap-6 p-6 justify-center">
+                    <button className="rounded text-slate-100 font-bold bg-sky-900 hover:bg-sky-950 px-6 py-2" type="submit" >
+                        {id === undefined ? 'Cadastrar' : 'Atualizar'}
+                    </button>
+                    <Link to={`/listarfuncionarios/`} className="rounded text-slate-100 font-bold bg-[#4172bd] hover:bg-[#275292] px-6 py-2">
+                        Cancelar
+                    </Link>
+                    
+                </div>
             </form>
         </div>
     );

@@ -11,7 +11,7 @@ function Footer() {
                         <p className='text-lg'>Acesse nosso Github: </p>
                         
                             <a href="https://github.com/Grupo-5-Generation" target="_blank">
-                                <GithubLogoIcon size={32} weight='bold' />
+                                <GithubLogoIcon size={28} weight='bold' />
                             </a>
                         </div>
                     <p className='text-xl font-bold'>

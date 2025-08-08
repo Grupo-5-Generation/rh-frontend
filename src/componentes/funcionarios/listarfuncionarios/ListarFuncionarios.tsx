@@ -2,12 +2,13 @@
 import { useEffect, useState } from "react";
 import { buscar } from "../../../services/Services";
 import type Funcionarios from "../../../models/Funcionarios";
+import CardFuncionarios from "../cardfuncionarios/CardFuncionarios";
 
 
 
 function ListaFuncionarios() {
 
-    const [funcionarios, setFuncionarios] = useState<Funcionarios>({} as Funcionarios)
+    const [funcionarios, setFuncionarios] = useState<Funcionarios []>([]);
 
     async function buscarFuncionarios() {
         await buscar('/funcionarios', setFuncionarios)
@@ -32,9 +33,9 @@ function ListaFuncionarios() {
                     <div className='container mx-auto my-4 
                         grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'
                     >
-                        {/* {funcionarios.map((funcionario) => (
-                            <CardCategorias key={categoria.id} categoria={categoria} />
-                        ))} */}
+                         {funcionarios.map((funcionario) => (
+                            <CardFuncionarios key={funcionario.id} funcionario={funcionario}/>
+                        ))}
                     </div>
                 </div>
             </div>

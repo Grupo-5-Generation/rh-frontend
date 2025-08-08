@@ -6,6 +6,8 @@ import FormSetor from "./componentes/setores/formsetores/FormSetores";
 import Cadastro from "./pages/cadastro/Cadastro";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
+import ListaFuncionarios from "./componentes/funcionarios/listarfuncionarios/ListarFuncionarios";
+import ListaSetores from "./componentes/setores/listarsetores/ListarSetores";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
             <Route path="/setores" element={<FormSetor />} />
             <Route path="/cadastrarfuncionarios" element={<FormFuncionarios />} />
             <Route path="/editarfuncionarios/:id" element={<FormFuncionarios />} />
+            <Route path="/listarfuncionarios" element={<ListaFuncionarios />} />
+            <Route path="/listarsetores" element={<ListaSetores />} />
           </Routes>
         </div>
         <Footer />

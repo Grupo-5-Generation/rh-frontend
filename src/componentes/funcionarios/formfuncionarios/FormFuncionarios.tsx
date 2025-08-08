@@ -4,7 +4,7 @@ import { useEffect, useState, type ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import type Funcionarios from "../../../models/Funcionarios";
 import type Setor from "../../../models/Setor";
-import { atualizar, buscar, cadastrar } from "../../../services/Services";
+import { atualizar, buscar, cadastrar, calcularSalario } from "../../../services/Services";
 
 
 function FormFuncionarios() {
@@ -52,8 +52,47 @@ function FormFuncionarios() {
             ...funcionario,
             [e.target.name]: e.target.value,
             setor: setor,
+           /* usuario:{id:1},*/
         })
     }
+
+
+
+
+  function Funcionario({ id }: { id: number }) {
+
+  async function handleCalcular() {
+    try {
+      const dados = await calcularSalario(id);
+      setFuncionario(dados);
+      alert("Salário atualizado com sucesso!");
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao calcular salário.");
+    }
+  }
+
+  return (
+    <div>
+      <button
+        onClick={handleCalcular}
+        className="bg-indigo-600 text-white px-4 py-2 rounded"
+      >
+        Calcular Salário
+      </button>
+
+      {funcionario && (
+        <p>Salário atualizado: R$ {funcionario.salario}</p>
+      )}
+    </div>
+  );
+}
+
+
+
+
+
+
 
     function retornar() {
         navigate("/funcionarios")

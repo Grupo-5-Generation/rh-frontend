@@ -33,7 +33,7 @@ function FormSetores() {
     }
 
     function retornar() {
-        navigate("/setores")
+        navigate("/listarsetores")
     }
 
 

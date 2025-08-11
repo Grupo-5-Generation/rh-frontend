@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import './Cadastro.css'
 
 function Cadastro() {
+
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 h-screen 
@@ -63,17 +64,14 @@ function Cadastro() {
           <div className="flex justify-around w-full gap-8">
             <button
               type='reset'
-              className='rounded text-white bg-red-400 hover:bg-red-700 w-1/2 py-2'
+              className='rounded text-white bg-[#4172bd] hover:bg-[#275292] w-1/2 py-2'
 
             >
               <Link to='/login' className=''>Cancelar</Link>
             </button>
             <button
               type='submit'
-              className='rounded text-white bg-indigo-400 
-                           hover:bg-indigo-900 w-1/2 py-2
-                           flex justify-center'
-            >
+              className='rounded text-white bg-sky-900 hover:bg-sky-950 w-1/2 py-2 flex justify-center'>
               <Link to='/home' className=''>Cadastrar</Link>
             </button>
           </div>

@@ -1,77 +1,90 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import type Funcionarios from '../../../models/Funcionarios';
-import { calcularSalario } from '../../../services/Services';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import type Funcionarios from "../../../models/Funcionarios";
+import { calcularSalario } from "../../../services/Services";
 
 interface CardFuncionariosProps {
-    funcionario: Funcionarios
+    funcionario: Funcionarios;
 }
 
 function CardFuncionarios({ funcionario }: CardFuncionariosProps) {
-
-    const [funcionarioAumento, setFuncionarioAumento] = useState<Funcionarios>({} as Funcionarios)
+    const [funcionarioAumento, setFuncionarioAumento] = useState<Funcionarios>(
+        {} as Funcionarios
+    );
     const navigate = useNavigate();
-
+    function formatarData(data: string) {
+        if (!data) return "";
+        const dt = new Date(data);
+        return dt.toLocaleDateString("pt-BR", { timeZone: "UTC" });
+    }
+    function formatarSalario(valor: number) {
+        return valor.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        });
+    }
 
     async function darAumento() {
         try {
-            await calcularSalario(`/funcionarios/${funcionario.id}`, setFuncionarioAumento);
+            await calcularSalario(
+            `/funcionarios/${funcionario.id}`,
+            setFuncionarioAumento
+            );
             alert("Salário atualizado com sucesso!");
-            navigate("/home");
+            navigate("/listarfuncionarios");
         } catch (error) {
             console.error(error);
             alert("Erro ao calcular salário.");
         }
     }
 
-
     return (
-        <div className='border-slate-900 border 
-            flex flex-col rounded overflow-hidden justify-between'>
-
-            <div>
-                <div className="flex w-full bg-sky-900 px-2 items-center gap-4 text-white">
-                    <img
-                        src='https://ik.imagekit.io/zddqh4rhi/397057724_11539820.png?updatedAt=1754672123040'
-                        className='h-16'
-                        alt="Foto do usuário"
-                    />
-                    <h3 className='text-lg font-bold text-center uppercase'>
-                        {funcionario.nome || 'Nome do Usuário'}
-                    </h3>
-                </div>
-                <div className='p-4 bg-white '>
-                    <h4 className='text-lg font-semibold uppercase'>Informações</h4>
-                    <p><strong>Salário:</strong> {funcionario.salario}</p>
-                    <p><strong>Data de início:</strong> {funcionario.data_admissao}</p>
-                    <p><strong>Aniversário:</strong> {funcionario.data_nascimento}</p>
-
-                </div>
-            </div>
-            <div className="flex p-4 gap-2">
-                <Link to={`/editarfuncionario/${funcionario.id}`}
-                    className='w-full text-white bg-sky-900 hover:bg-sky-950
-                    flex items-center justify-center py-2 font-bold rounded-lg'>
-                        <i className="fa-solid fa-edit text-white text-1xl p-2"></i>
-                    Editar
+        <tr className="border-b hover:bg-gray-50">
+        {/* Coluna Ações */}
+        <td className="px-4 py-3">
+            <div className="relative inline-block text-left text-sky-900">
+            <details className="group">
+                <summary className="list-none cursor-pointer p-2 rounded-lg hover:bg-gray-300">
+                ☰
+                </summary>
+                <div className="absolute mt-1 bg-white border rounded-lg shadow-lg w-40 z-10">
+                <Link to={`/editarfuncionario/${funcionario.id}`} className="block px-4 py-2 hover:bg-gray-100">
+                    <i className="fa-solid fa-edit text-1xl p-2"></i>
+                    Alterar
                 </Link>
-                <button onClick={darAumento} className='font-bold text-white bg-green-700
-                     hover:bg-green-900 w-full flex items-center justify-center rounded-lg cursor-pointer'>
-                        <i className="fa fa-plus text-white text-1xl p-1"></i>
-                        Dar aumento</button>
-
-
-                <Link to={`/deletarfuncionario/${funcionario.id}`}
-                    className='text-white bg-red-800 font-bold
-                         hover:bg-red-900 w-full flex items-center justify-center rounded-lg'>
-                            <i className="fa fa-eraser text-white text-1xl p-2"></i>
+                <button onClick={darAumento} className="w-full text-left px-4 py-2 hover:bg-gray-100">
+                    <i className="fa-solid fa-usd text-1xl p-2"></i>
+                    Dar aumento
+                </button>
+                <Link to={`/deletarfuncionario/${funcionario.id}`} className="block px-4 py-2 hover:bg-gray-100">
+                <i className="fa-solid fa-trash text-1xl p-2"></i>
                     Deletar
                 </Link>
-
+                </div>
+            </details>
             </div>
-        </div>
-    )
+        </td>
+
+        {/* Coluna Funcionário */}
+        <td className="px-4 py-3 flex items-center gap-2">
+            <img src="https://ik.imagekit.io/zddqh4rhi/397057724_11539820.png?updatedAt=1754672123040" alt="Foto" className="w-8 h-8 rounded-full"/>
+            <span className="font-medium">{funcionario.nome}</span>
+        </td>
+            
+        {/* Coluna Data de Admissão */}
+        <td className="px-4 py-3">{formatarData(funcionario.data_admissao)}</td>
+
+        {/* Coluna Salário */}
+        <td className="px-4 py-3">{formatarSalario(funcionario.salario)}</td>
+
+        {/* Coluna Setor */}
+        <td className="px-4 py-3">{funcionario.setor?.nome || "—"}</td>
+
+        {/* Coluna Data de Nascimento */}
+        <td className="px-4 py-3">{formatarData(funcionario.data_nascimento)}</td>
+        </tr>
+    );
 }
 
-export default CardFuncionarios
+export default CardFuncionarios;

@@ -30,10 +30,7 @@ function Login() {
 
                         />
                     </div>
-                    <button
-                        type='submit'
-                        className="rounded bg-orange-300 flex justify-center
-                                    hover:bg-orange-400 text-sky-950 w-1/2 py-2">
+                    <button type='submit'className='rounded text-white bg-sky-900 hover:bg-sky-950 w-1/2 py-2 flex justify-center'>
                         <Link to='/home' className=''>Entrar</Link>
                     </button>
 

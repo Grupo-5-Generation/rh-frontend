@@ -3,19 +3,18 @@ import { Link } from "react-router-dom"
 function Navbar() {
     return (
         <>
-            <div className='w-full flex justify-center py-4
-            			   bg-sky-900
-                            text-white'>
-
-                <div className="container flex justify-between text-lg">
-                    <Link to='/home' className="text-2xl font-bold">NoWhereRH</Link>
+            <div className='w-full bg-sky-900 text-white py-4'>
+                <div className="container mx-auto flex justify-between text-lg px-8">
+                    <Link to='/home' className="text-2xl font-bold px-2 hover:bg-[#275292]">NoWhereRH</Link>
 
                     <div className='flex gap-4'>
-                        <Link to='/home' className='hover:bg-amber-500'>Home</Link>
-                        <Link to='/funcionarios' className='hover:bg-amber-500'> Cadastrar Funcionários</Link>
-                        <Link to='/setores' className='hover:bg-amber-500'> Cadastrar Setor</Link>
-                        <Link to='/listarfuncionarios' className='hover:bg-amber-500'>Funcionarios </Link>
-                        <Link to='/listarsetores' className='hover:bg-amber-500'>Setor</Link>
+                        <Link to='/home' className='rounded-md px-2 hover:bg-[#275292]'>Home</Link>
+                        {/* <Link to='/funcionarios' className='hover:bg-amber-500'> Cadastrar Funcionários</Link> */}
+                        <Link to='/listarfuncionarios' className='rounded-md px-2 hover:bg-[#275292]'>Funcionários </Link>
+                        <Link to='/listarsetores' className='rounded-md px-2 hover:bg-[#275292]'>Setores</Link>
+                        {/* <Link to='/setores' className='hover:bg-amber-500'> Cadastrar Setor</Link> */}
+                        <Link to='/login' className='rounded-md px-2 hover:bg-[#275292]'>Sair<i className="fa fa-sign-out pl-2 text-white text-base p-1"></i></Link>
+                        
       
                     </div>
                 </div>

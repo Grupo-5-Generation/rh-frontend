@@ -9,7 +9,7 @@ function Cadastro() {
             place-items-center font-bold">
         <div className="fundoCadastro hidden lg:block"></div>
         <form className='flex justify-center items-center flex-col w-2/3 gap-3' >
-          <h2 className='text-slate-900 text-5xl'>Cadastrar</h2>
+          <h2 className='text-sky-900 text-5xl'>Cadastrar</h2>
           <div className="flex flex-col w-full">
             <label htmlFor="nome">Nome</label>
             <input
@@ -17,7 +17,7 @@ function Cadastro() {
               id="nome"
               name="nome"
               placeholder="Nome"
-              className="border-2 border-slate-700 rounded p-2"
+              className="border-2 border-sky-900 bg-white rounded p-2"
 
             />
           </div>
@@ -28,7 +28,7 @@ function Cadastro() {
               id="usuario"
               name="usuario"
               placeholder="Usuario"
-              className="border-2 border-slate-700 rounded p-2"
+              className="border-2 border-sky-900 bg-white rounded p-2"
             />
           </div>
           <div className="flex flex-col w-full">
@@ -38,7 +38,7 @@ function Cadastro() {
               id="foto"
               name="foto"
               placeholder="Foto"
-              className="border-2 border-slate-700 rounded p-2"
+              className="border-2 border-sky-900 bg-white rounded p-2"
             />
           </div>
           <div className="flex flex-col w-full">
@@ -48,7 +48,7 @@ function Cadastro() {
               id="senha"
               name="senha"
               placeholder="Senha"
-              className="border-2 border-slate-700 rounded p-2"
+              className="border-2 border-sky-900 bg-white rounded p-2"
             />
           </div>
           <div className="flex flex-col w-full">
@@ -58,7 +58,7 @@ function Cadastro() {
               id="confirmarSenha"
               name="confirmarSenha"
               placeholder="Confirmar Senha"
-              className="border-2 border-slate-700 rounded p-2"
+              className="border-2 border-sky-900 bg-white rounded p-2"
             />
           </div>
           <div className="flex justify-around w-full gap-8">

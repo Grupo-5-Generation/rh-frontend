@@ -36,7 +36,7 @@ function Home() {
                         </div>
                         <h2 className="text-lg font-semibold mb-2">Cadastro de funcionários</h2>
                         <p className="text-sm text-gray-200 text-center">
-                            Corpo de texto para adicionar mais informações, além do subtítulo.
+                            Com essa funcionalidade é possível cadastrar novos colaboradores, informando dados como nome, cargo, setor e informações de contato. Também é possível consultar, editare remover registros já existentes, mantendo as informações sempre atualizadas.
                         </p>
                     </div>
 
@@ -47,7 +47,7 @@ function Home() {
                         </div>
                         <h2 className="text-lg font-semibold mb-2">Cadastro de setores</h2>
                         <p className="text-sm text-gray-200 text-center">
-                            Corpo de texto para outras informações que você queira compartilhar.
+                            Com essa funcionalidade é possível criar novos setores, informando dados como nome e descrição. Também é possível consultar, editar e remover setores já cadastrados, garantindo que a estrutura organizacional esteja sempre atualizada.
                         </p>
                     </div>
 
@@ -58,7 +58,7 @@ function Home() {
                         </div>
                         <h2 className="text-lg font-semibold mb-2">Função de aumento salarial</h2>
                         <p className="text-sm text-gray-200 text-center">
-                            Corpo de texto para explicar melhor o ponto principal.
+                            Com essa funcionalidade, você poderá registrar reajustes salariais para os colaboradores, informando o valor ou percentual e a data em que o aumento entra em vigor. Uma forma simples e organizada de reconhecer e valorizar o trabalho da equipe..
                         </p>
                     </div>
 

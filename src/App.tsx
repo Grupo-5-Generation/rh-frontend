@@ -1,9 +1,10 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./componentes/footer/Footer";
 import DeletarFuncionario from "./componentes/funcionarios/deletarfuncionario/DeletarFuncionario";
 import FormFuncionarios from "./componentes/funcionarios/formfuncionarios/FormFuncionarios";
 import ListaFuncionarios from "./componentes/funcionarios/listarfuncionarios/ListarFuncionarios";
 import Navbar from "./componentes/navbar/Navbar";
+import NavbarLogin from "./componentes/navbar/NavbarLogin";
 import DeletarSetor from "./componentes/setores/deletarsetor/DeletarSetor";
 import FormSetores from "./componentes/setores/formsetores/FormSetores";
 import ListaSetores from "./componentes/setores/listarsetores/ListarSetores";
@@ -12,10 +13,16 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 
 function App() {
+  const location = useLocation();
+
+  // Verifica se está na rota login
+  const isLoginPage = location.pathname === "/" || location.pathname === "/login";
+
   return (
     <>
-      <BrowserRouter>
-        <Navbar />
+      {/* <BrowserRouter> */}
+        {isLoginPage ? <NavbarLogin /> : <Navbar />}
+        {/* <Navbar /> */}
         <div className="min-h-[80vh] bg-[#fffbf7]">
           <Routes>
             <Route path="/" element={<Login />} />
@@ -35,7 +42,7 @@ function App() {
           </Routes>
         </div>
         <Footer />
-      </BrowserRouter>
+      {/* </BrowserRouter> */}
     </>
   );
 }
